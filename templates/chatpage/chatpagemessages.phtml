@@ -1,0 +1,21 @@
+<?php ?>
+<?php $messagess = $model->getMessages(); ?>
+<?php $sessionId = $model->getSeesionId(); ?>
+<?php $isAdmin = $model->isAdmin(); ?>
+<div id="scroll">
+    <?php foreach ($messagess as $ms): ?>
+    <div id="scroll">
+
+        <?php $isOwn = $ms['userid'] == $sessionId; ?>
+
+        <span id="message_<?=$ms['id']?>" class="chat_message <?= $isOwn ? 'own_message' : 'other_message' ?>" >
+        <?= $isOwn ? 'Вы' : $ms['userid'] ?>
+        : <?=$ms['message']?>
+        </span>
+        <?php if ($isAdmin == true): ?>
+            <div id="button<?=$ms['id']?>" class="button_del" onclick="sendDeleteAjax(<?=$ms['id']?>)" ></div>
+        <?php endif; ?>
+    </div>
+    <?php endforeach; ?>
+</div>
+
